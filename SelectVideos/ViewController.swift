@@ -26,19 +26,13 @@ class ViewController: UIViewController {
             $0.1 < $1.1
         }
     }
-    func unSelectedAssetImages() -> [(PHAsset,Int)]
-    {
-        return assetImages.filter{
-            $0.1 ==  -1
-        }
-    }
     func initGUI()
     {
         videoCollectionView.insertSubview(addVideoView, aboveSubview: self.videoCollectionView)
         addButton.layer.cornerRadius = 4
     }
     
-    
+    // MARK: load image from gallery
     private func loadData()
     {
         PHPhotoLibrary.requestAuthorization
@@ -67,6 +61,8 @@ class ViewController: UIViewController {
     {
         addVideoView.isHidden = true
     }
+    
+    // MARK: update video selected state
     func updateVideosSelection()
     {
         var selectedVideos = selectedAssetImages()
@@ -77,15 +73,6 @@ class ViewController: UIViewController {
         else
         {
             onSelectedMode()
-//            var i = 1
-//            for value in selectedVideos
-//            {
-//                let index = assetImages.firstIndex(where: {$0.0 == value.0})!
-//                let indexpath = IndexPath(row: index, section: 0)
-//                let cell = videoCollectionView.cellForItem(at: indexpath) as! CollectionViewCell
-//                cell.countLabel.text = "\(i)"
-//                i += 1
-//            }
         }
         for index in 0...assetImages.count-1
         {
@@ -120,8 +107,30 @@ class ViewController: UIViewController {
         selectedVideoCollectionView.register(UINib(nibName: "VideoSelectedCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: "VideoSelectedCollectionViewCell")
         videoCollectionView.register(UINib(nibName: "CollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: "CollectionViewCell")
         // Do any additional setup after loading the view.
+        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
+        selectedVideoCollectionView.addGestureRecognizer(gesture)
     }
-    //convert time
+    // MARK: long press event handle
+    @objc func handleLongPressGesture(_ gesture: UILongPressGestureRecognizer)
+    {
+        switch gesture.state
+        {
+        case .began:
+            guard let indexPath = selectedVideoCollectionView.indexPathForItem(at: gesture.location(in: selectedVideoCollectionView))
+            else
+            {
+                return
+            }
+            selectedVideoCollectionView.beginInteractiveMovementForItem(at: indexPath)
+        case .changed:
+            selectedVideoCollectionView.updateInteractiveMovementTargetPosition(gesture.location(in: selectedVideoCollectionView))
+        case .ended:
+            selectedVideoCollectionView.endInteractiveMovement()
+        default:
+            selectedVideoCollectionView.cancelInteractiveMovement()
+        }
+    }
+    // MARK: convert video duration
     func durationTransfer(duration: Double) -> String
     {
         var res: String
@@ -140,6 +149,7 @@ class ViewController: UIViewController {
 
 }
 
+// MARK: collectionView delegate
 extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -188,20 +198,21 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
         }
         else
         {
-            var selectedVideos = selectedAssetImages()
+            let selectedVideos = selectedAssetImages()
             let cell = selectedVideoCollectionView.dequeueReusableCell(withReuseIdentifier: "VideoSelectedCollectionViewCell", for: indexPath) as! VideoSelectedCollectionViewCell
-            let index = assetImages.firstIndex(where: {$0.0 == selectedVideos[indexPath.row].0})!
-            let asset = self.assetImages[index].0
+            let asset = selectedVideos[indexPath.row].0
             cell.asset = asset
             cell.delegate = self
             let manager = PHImageManager.default()
-            manager.requestImage(for:  asset, targetSize: CGSize(width: 10,height: 10), contentMode: .aspectFill, options: nil)
+            manager.requestImage(for:  asset, targetSize: CGSize(width: 20,height: 20), contentMode: .aspectFill, options: nil)
             {
                 image,_ in
                 DispatchQueue.main.async {
                     cell.selectedVideoImageView.image = image
                 }
             }
+            print(cell.bounds.height)
+            print(cell.bounds.width)
             return cell;
         }
     }
@@ -214,8 +225,8 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
         }
         else
         {
-            let width = 10
-            let height = 10
+            let width = 48
+            let height = width
             return CGSize(width: width, height: height)
         }
     }
@@ -226,11 +237,11 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
         }
         else
         {
-            return UIEdgeInsets(top: 0, left: 0, bottom: 3, right: 0)
+            return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        var selectedVideos = selectedAssetImages()
+        let selectedVideos = selectedAssetImages()
         if(collectionView == videoCollectionView)
         {
             let cell = collectionView.cellForItem(at: indexPath) as! CollectionViewCell
@@ -263,8 +274,16 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
         }
         updateVideosSelection()
     }
+    func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let item = assetImages.remove(at: sourceIndexPath.row)
+        assetImages.insert(item, at: destinationIndexPath.row)
+    }
 }
 
+// MARK: -selectedVideoCellDelegate
 extension ViewController: VideoSelectedCollectionViewCellDelegate
 {
     func videoSelectedCollectionViewCell(_ cell: UICollectionViewCell, _ deletedAsset: PHAsset) {
