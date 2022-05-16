@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="VideoSelectedCollectionViewCell" customModule="SelectVideos" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="s4G-vi-kGx">
+                        <rect key="frame" x="0.0" y="8" width="92" height="92"/>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="62m-Sd-BiG">
+                        <rect key="frame" x="84" y="0.0" width="16" height="16"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="rl6-o2-5dC"/>
+                            <constraint firstAttribute="width" constant="16" id="ycN-kd-0vC"/>
+                        </constraints>
+                        <color key="tintColor" red="0.039215686270000001" green="0.039215686270000001" blue="0.039215686270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" image="x.circle" catalog="system"/>
+                        <connections>
+                            <action selector="deleteSelectedVideo:" destination="gTV-IL-0wX" eventType="touchUpInside" id="MG9-c3-rji"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="s4G-vi-kGx" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="0rs-H3-mCz"/>
+                <constraint firstAttribute="trailing" secondItem="62m-Sd-BiG" secondAttribute="trailing" id="P1M-6J-Ini"/>
+                <constraint firstAttribute="bottom" secondItem="s4G-vi-kGx" secondAttribute="bottom" id="Pi8-8o-yBc"/>
+                <constraint firstAttribute="trailing" secondItem="s4G-vi-kGx" secondAttribute="trailing" constant="8" id="PpL-wM-fJC"/>
+                <constraint firstItem="62m-Sd-BiG" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="p5i-nZ-MfT"/>
+                <constraint firstItem="s4G-vi-kGx" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="zgt-fT-70A"/>
+            </constraints>
+            <size key="customSize" width="100" height="106"/>
+            <connections>
+                <outlet property="deleteSelectedVideoButton" destination="62m-Sd-BiG" id="hGI-nU-mho"/>
+                <outlet property="selectedVideoImageView" destination="s4G-vi-kGx" id="Tas-3k-FQ5"/>
+            </connections>
+            <point key="canvasLocation" x="173.91304347826087" y="98.4375"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="x.circle" catalog="system" width="128" height="121"/>
+    </resources>
+</document>

@@ -18,6 +18,9 @@
 		C8A62F1B282DF93000E64CC9 /* SelectVideosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A62F1A282DF93000E64CC9 /* SelectVideosUITestsLaunchTests.swift */; };
 		C8A62F29282E046F00E64CC9 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A62F27282E046F00E64CC9 /* CollectionViewCell.swift */; };
 		C8A62F2A282E046F00E64CC9 /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8A62F28282E046F00E64CC9 /* CollectionViewCell.xib */; };
+		C8A62F2D2832280500E64CC9 /* VideoSelectedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A62F2B2832280500E64CC9 /* VideoSelectedCollectionViewCell.swift */; };
+		C8A62F2E2832280500E64CC9 /* VideoSelectedCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8A62F2C2832280500E64CC9 /* VideoSelectedCollectionViewCell.xib */; };
+		C8A62F30283241F300E64CC9 /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A62F2F283241F300E64CC9 /* Asset.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +56,9 @@
 		C8A62F1A282DF93000E64CC9 /* SelectVideosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectVideosUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C8A62F27282E046F00E64CC9 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		C8A62F28282E046F00E64CC9 /* CollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
+		C8A62F2B2832280500E64CC9 /* VideoSelectedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSelectedCollectionViewCell.swift; sourceTree = "<group>"; };
+		C8A62F2C2832280500E64CC9 /* VideoSelectedCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoSelectedCollectionViewCell.xib; sourceTree = "<group>"; };
+		C8A62F2F283241F300E64CC9 /* Asset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +118,9 @@
 				C8A62F05282DF92F00E64CC9 /* Info.plist */,
 				C8A62F27282E046F00E64CC9 /* CollectionViewCell.swift */,
 				C8A62F28282E046F00E64CC9 /* CollectionViewCell.xib */,
+				C8A62F2B2832280500E64CC9 /* VideoSelectedCollectionViewCell.swift */,
+				C8A62F2C2832280500E64CC9 /* VideoSelectedCollectionViewCell.xib */,
+				C8A62F2F283241F300E64CC9 /* Asset.swift */,
 			);
 			path = SelectVideos;
 			sourceTree = "<group>";
@@ -239,6 +248,7 @@
 			files = (
 				C8A62F04282DF92F00E64CC9 /* LaunchScreen.storyboard in Resources */,
 				C8A62F01282DF92F00E64CC9 /* Assets.xcassets in Resources */,
+				C8A62F2E2832280500E64CC9 /* VideoSelectedCollectionViewCell.xib in Resources */,
 				C8A62F2A282E046F00E64CC9 /* CollectionViewCell.xib in Resources */,
 				C8A62EFF282DF92E00E64CC9 /* Main.storyboard in Resources */,
 			);
@@ -265,6 +275,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8A62F30283241F300E64CC9 /* Asset.swift in Sources */,
+				C8A62F2D2832280500E64CC9 /* VideoSelectedCollectionViewCell.swift in Sources */,
 				C8A62EFC282DF92E00E64CC9 /* ViewController.swift in Sources */,
 				C8A62EF8282DF92E00E64CC9 /* AppDelegate.swift in Sources */,
 				C8A62F29282E046F00E64CC9 /* CollectionViewCell.swift in Sources */,
